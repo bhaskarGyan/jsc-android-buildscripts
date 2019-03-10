@@ -60,6 +60,7 @@ jobs:
             nvm alias default 10
       - run: npm run clean
       - run: npm run download
+      - run: cp perf_patch/Heap.cpp build/download/webkit/Source/JavaScriptCore/heap/
       - run: npm run start
       - run:
           name: compress dist
