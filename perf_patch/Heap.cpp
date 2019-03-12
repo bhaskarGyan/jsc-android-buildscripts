@@ -2414,7 +2414,7 @@ bool Heap::shouldDoFullCollection()
 {
     if (!useGenerationalGC())
         return true;
-
+    return true;
     if (!m_currentRequest.scope)
         return m_shouldDoFullCollection || overCriticalMemoryThreshold();
     return *m_currentRequest.scope == CollectionScope::Full;
