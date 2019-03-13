@@ -9,26 +9,26 @@ This project is based on [facebook/android-jsc](https://github.com/facebook/andr
 
 ## Requirements
 
-* Homebrew (https://brew.sh/)
-* GNU coreutils `brew install coreutils`
-* Node `brew install node`
-* Java 8: `brew tap caskroom/versions && brew cask install java8`
-* Android SDK: `brew cask install android-sdk`
-  * Run `sdkmanager --list` and install all platforms, tools, cmake, ndk (android images are not needed)
-  * Set `$ANDROID_HOME` to the correct path (in ~/.bashrc or similar)
-  * Set `export ANDROID_NDK=$ANDROID_HOME/ndk-bundle`
-  * Set `export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools/bin`
-* Make sure you have Ruby (>2.3), Python (>2.7), Git, SVN, gperf
+- Homebrew (https://brew.sh/)
+- GNU coreutils `brew install coreutils`
+- Node `brew install node`
+- Java 8: `brew tap caskroom/versions && brew cask install java8`
+- Android SDK: `brew cask install android-sdk`
+  - Run `sdkmanager --list` and install all platforms, tools, cmake, ndk (android images are not needed)
+  - Set `$ANDROID_HOME` to the correct path (in ~/.bashrc or similar)
+  - Set `export ANDROID_NDK=$ANDROID_HOME/ndk-bundle`
+  - Set `export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools/bin`
+- Make sure you have Ruby (>2.3), Python (>2.7), Git, SVN, gperf
 
 ## Build instructions
 
 1. Clone this repo
 2. `npm run clean` will clean everything (artifacts, downloaded sources)
 3. Update the version in package.json. The version will be printed by JSC lib as soon as it loads.
-3. Update the config section under `package.json` to the desired build configuration
-4. Update patches if needed (don't forget to update the `printVersion` patch in jsc.patch)
-5. `npm run download`: downloads all needed sources
-6. `npm run start`: builds jsc (this might take some time...)
+4. Update the config section under `package.json` to the desired build configuration
+5. Update patches if needed (don't forget to update the `printVersion` patch in jsc.patch)
+6. `npm run download`: downloads all needed sources
+7. `npm run start`: builds jsc (this might take some time...)
 
 The zipfile containing the android-jsc AAR will be available at `/dist`.
 The library is packaged as a local Maven repository containing AAR files that include the binaries.
@@ -46,6 +46,7 @@ On load, JSC prints the version out to logcat, under "JavaScriptCore.Version" ta
 Follow steps below in order for your React Native app to use new version of JSC VM on android:
 
 1. Add `jsc-android` to the "dependencies" section in your `package.json`:
+
 ```diff
 dependencies {
 +  "jsc-android": "241213.x.x",
@@ -54,6 +55,7 @@ dependencies {
 then run `npm install` or `yarn` (depending which npm client you use) in order for the new dependency to be installed in `node_modules`
 
 2. Modify `android/build.gradle` file to add new local maven repository packaged in the `jsc-android` package to the search path:
+
 ```diff
 allprojects {
     repositories {
@@ -78,7 +80,7 @@ allprojects {
 
 +configurations.all {
 +    resolutionStrategy {
-+        force 'org.webkit:android-jsc:r241213'
++        force 'org.bgv:android-jsc:r241213'
 +    }
 +}
 
@@ -89,6 +91,7 @@ dependencies {
 4. You're done, rebuild your app and enjoy updated version of JSC on android!
 
 ### International variant
+
 International variant includes ICU i18n library and necessary data allowing to use e.g. Date.toLocaleString and String.localeCompare that give correct results when using with locales other than en-US. Note that this variant is about 6MiB larger per architecture than default.
 
 To use this variant instead replace the third installation step with:
@@ -112,6 +115,7 @@ See **[Measurements](/measure)** page that contains synthetic perf test results 
 ## Troubleshooting
 
 Compile errors of the sort:
+
 ```shell
 More than one file was found with OS independent path 'lib/armeabi-v7a/libgnustl_shared.so'
 ```
@@ -125,6 +129,7 @@ packagingOptions {
 ```
 
 ## Resources
+
 - [WebkitGTK Sources](https://svn.webkit.org/repository/webkit/releases/WebKitGTK/)
 - [ICU Sources](https://android.googlesource.com/platform/external/icu/)
 - [Info about Webkit Revisions](https://trac.webkit.org/browser/webkit/releases/WebKitGTK)
@@ -134,14 +139,11 @@ packagingOptions {
 
 Check [the list of contributors here](https://github.com/react-community/jsc-android-buildscripts/graphs/contributors). This project is supported by:
 
-
 [![expo](https://avatars2.githubusercontent.com/u/12504344?v=3&s=100 "Expo.io")](https://expo.io)
 [Expo.io](https://expo.io)
 
-
 [![swm](https://avatars1.githubusercontent.com/u/6952717?v=3&s=100 "Software Mansion")](https://swmansion.com)
 [Software Mansion](https://swmansion.com)
-
 
 [![wix](https://avatars3.githubusercontent.com/u/686511?s=200&v=4&s=100 "Wix")](https://www.wix.engineering)
 [Wix](https://www.wix.engineering)

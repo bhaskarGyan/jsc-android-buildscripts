@@ -32,7 +32,7 @@ task createAAR(type: Upload) {
         if (!i18n) throw new RuntimeException("expecting --project-prop i18n=??? but was empty")
     }
 
-    project.group = "org.webkit"
+    project.group = "org.bgv"
     def artifactName = Boolean.valueOf(i18n) ? "android-jsc-intl" : "android-jsc"
     project.version = "r${revision}"
 
